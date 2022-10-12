@@ -115,7 +115,7 @@ for name, xp in quests.items():
     print(f"Quests Name: {name}\t Quests XP: {xp}")
     
 completed_quest = "Yorick's Journal"
-print(f"\nYou have completed {completed_quest} for {quests.get('Grand Tournament')}xp.\n")
+print(f"\nYou have completed {completed_quest} for {quests.get(completed_quest)}xp.\n")
 
 quests.pop(completed_quest)
 
