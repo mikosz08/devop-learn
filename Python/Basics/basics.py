@@ -134,9 +134,9 @@ Congrats! You've passed the level!
         You're here:    'Catacombs F4'
         You've lost:    108 health points.
 
-You have rolled: [1].
-131 * 0.75 =  98.25
-Better luck next time. You hit for 98.25.
+You have rolled: [3].
+151 * 1.5 =  226.5
+Nice! Critical hit! You hit for 226.5.
 Your inventory:
 [['Sword', 'Wand', 'Axe', 'Zweihänder'], ['Armor Potion', 'Health Potion', 'Courage Potion'], []]
 You have 7 items.
@@ -145,15 +145,15 @@ You have found a treasure!
 [['Sword', 'Wand', 'Magic Sword', 'Axe', 'Zweihänder'], ['Armor Potion', 'Health Potion', 'Courage Potion'], ['Gold Ornament']]
 You have 9 items.
 
-You have used Armor Potion!
-[['Sword', 'Wand', 'Magic Sword', 'Axe', 'Zweihänder'], ['Health Potion', 'Courage Potion'], ['Gold Ornament']]
+You have used Health Potion!
+[['Sword', 'Wand', 'Magic Sword', 'Axe', 'Zweihänder'], ['Armor Potion', 'Courage Potion'], ['Gold Ornament']]
 You have 8 items.
 
 Village
-TOWNSPERSON = [27]
-MINER = [24]
-GUARD = [28]
-NOBLEMAN = [21]
+TOWNSPERSON = [30]
+MINER = [30]
+GUARD = [14]
+NOBLEMAN = [26]
 Total: [100]
 
 Your missions:
@@ -161,7 +161,7 @@ Quests Name: Yorick's Journal    Quests XP: 1060
 Quests Name: Grand Tournament    Quests XP: 5400
 Quests Name: Getting Stronger    Quests XP: 640
 
-You have completed Yorick's Journal for 5400xp.
+You have completed Yorick's Journal for 1060xp.
 
 Your missions:
 Quests Name: Grand Tournament    Quests XP: 5400
