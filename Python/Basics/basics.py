@@ -1,6 +1,6 @@
 """
 https://www.pythoncheatsheet.org/cheatsheet/
-Some basics:
+Some basic examples of:
 1. Variables
 2. Flow Controll (if/elif/else)
 3. Random
@@ -10,12 +10,22 @@ Some basics:
 7. String Manipulations
 8. Functions
 """
+import random
+from re import A
+from time import sleep
+
+
+def line():
+    print(f'\n' + '~#' * 35)
 
 
 # [1]===========================================================================
-import random
 time_left = 0.1253432
+
 passed_on_time = True
+luck = random.random()
+if luck > 0.4345765:
+    passed_on_time = False
 
 location_name = "Catacombs F4"
 location_text = 'You\'re here:\t\'' + location_name + '\''
@@ -39,10 +49,10 @@ else:
 
 
 # [3]===========================================================================
-hit = random.randint(10, 165)
+hit = random.randint(43, 78)
 roll = random.randint(1, 6)
 roll_text = f"You have rolled: [{roll}]."
-dmg_multiplier = [2.0, 1.5, 1.1, 0.75]
+dmg_multiplier = (2.0, 1.5, 1.1, 0.75)
 print(roll_text)
 
 if roll == 6:
@@ -94,7 +104,7 @@ print(f"You have {len(eq[0]) + len(eq[1]) + len(eq[2])} items.")
 # [5]===========================================================================
 print("\nVillage")
 types_of_villagers = ["Townsperson", "Miner", "Guard", "Nobleman"]
-population_limit = 100
+population_limit = 10_000
 village_population = []
 
 for i in range(population_limit):
@@ -106,23 +116,24 @@ for villager in types_of_villagers:
 print(f"Total: [{len(village_population)}]")
 
 # [6]===========================================================================
-quests = {"Yorick's Journal":1060,
-          "Grand Tournament":5400,
-          "Getting Stronger":640}
+quests = {"Yorick's Journal": 1060,
+          "Grand Tournament": 5400,
+          "Getting Stronger": 640}
 
 print(f"\nYour missions: ")
 for name, xp in quests.items():
     print(f"Quests Name: {name}\t Quests XP: {xp}")
-    
+
 completed_quest = "Yorick's Journal"
-print(f"\nYou have completed {completed_quest} for {quests.get(completed_quest)}xp.\n")
+print(
+    f"\nYou have completed {completed_quest} for {quests.get(completed_quest)}xp.\n")
 
 quests.pop(completed_quest)
 
 print(f"Your missions: ")
 for name, xp in quests.items():
     print(f"Quests Name: {name}\t Quests XP: {xp}")
-    
+
 # [7]===========================================================================
 # TODO
 # [8]===========================================================================
@@ -134,36 +145,36 @@ Congrats! You've passed the level!
         You're here:    'Catacombs F4'
         You've lost:    108 health points.
 
-You have rolled: [3].
-151 * 1.5 =  226.5
-Nice! Critical hit! You hit for 226.5.
+You have rolled: [6].
+58 * 2.0 =  116.0
+Excellent! Critical hit! You hit for 116.0.
 Your inventory:
-[['Sword', 'Wand', 'Axe', 'Zweihänder'], ['Armor Potion', 'Health Potion', 'Courage Potion'], []]
+[['Sword', 'Wand', 'Axe', 'Zweihänder'], ['Armor Potion', 'Health Potion', 'Courage Potion'], []]       
 You have 7 items.
 
 You have found a treasure!
 [['Sword', 'Wand', 'Magic Sword', 'Axe', 'Zweihänder'], ['Armor Potion', 'Health Potion', 'Courage Potion'], ['Gold Ornament']]
 You have 9 items.
 
-You have used Health Potion!
-[['Sword', 'Wand', 'Magic Sword', 'Axe', 'Zweihänder'], ['Armor Potion', 'Courage Potion'], ['Gold Ornament']]
+You have used Armor Potion!
+[['Sword', 'Wand', 'Magic Sword', 'Axe', 'Zweihänder'], ['Health Potion', 'Courage Potion'], ['Gold Ornament']]
 You have 8 items.
 
 Village
-TOWNSPERSON = [30]
-MINER = [30]
-GUARD = [14]
-NOBLEMAN = [26]
-Total: [100]
+TOWNSPERSON = [2504]
+MINER = [2425]
+GUARD = [2537]
+NOBLEMAN = [2534]
+Total: [10000]
 
 Your missions:
-Quests Name: Yorick's Journal    Quests XP: 1060
-Quests Name: Grand Tournament    Quests XP: 5400
-Quests Name: Getting Stronger    Quests XP: 640
+Quests Name: Yorick's Journal    Quests XP: 1060    
+Quests Name: Grand Tournament    Quests XP: 5400    
+Quests Name: Getting Stronger    Quests XP: 640     
 
-You have completed Yorick's Journal for 1060xp.
+You have completed Yorick's Journal for 1060xp.     
 
 Your missions:
-Quests Name: Grand Tournament    Quests XP: 5400
+Quests Name: Grand Tournament    Quests XP: 5400    
 Quests Name: Getting Stronger    Quests XP: 640
 """
