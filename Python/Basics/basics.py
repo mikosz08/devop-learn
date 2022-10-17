@@ -128,16 +128,100 @@ completed_quest = "Yorick's Journal"
 print(
     f"\nYou have completed {completed_quest} for {quests.get(completed_quest)}xp.\n")
 
-quests.pop(completed_quest)
+deleted_quest = quests.pop(completed_quest)
 
 print(f"Your missions: ")
 for name, xp in quests.items():
     print(f"Quests Name: {name}\t Quests XP: {xp}")
 
 # [7]===========================================================================
-# TODO
+print()
+quote = """
+a wizard is never late
+frodo Baggins
+nor is he early He arrives precisely when he means to
+                                            — Gandalf
+"""
+print(quote + '\n')
+quote_words = quote.split()
+print(quote_words)
+print(f"This quote have {len(quote)} letters, and {len(quote_words)} words.\n")
+
+quote = """
+It is the job that is never started as takes longest to finish 
+                                                    - Sam Gamgee
+Even the smallest person can change the course of the future
+                                                    - Galadriel
+I would rather share one lifetime with you than face all the ages of this world alone
+                                                    - Arwen
+"""
+
+words = quote.split()
+word_count_dict = {}
+counter = 1
+
+for word in words:
+    if word in word_count_dict:
+        word_count_dict[word] += counter
+    else:
+        word_count_dict[word] = counter
+
+print("Characters occurances: ")
+loops = 5
+for w, c in word_count_dict.items():
+    if (loops) == 0:
+        break
+    print(f"Word: '{w}'\nOccured: {c} time/s.\n===")
+    loops -= 1
+
 # [8]===========================================================================
-# TODO
+
+
+def prepare(hp: int, attack: int, bag: list):
+    stats = [hp, attack]
+    return stats, bag
+
+def fight(player, enemy):
+    import random
+    roll = random.random()
+    player_turn = False
+    if roll > 0.50:
+        print(f"You attack first! ({roll})")
+        player_turn = True
+    else:
+        print(f"Enemy starts. ({roll})")
+
+    round = 1
+    while enemy[0][0] > 0 and player[0][0] > 0:
+        print(f"\n================Round {round}================")
+        print(f"Player's HP: {player[0][0]}")
+        print(f"Enemy's HP: {enemy[0][0]}")
+        if player_turn:
+            hit = int(player[0][1] * random.random())
+            enemy[0][0] -= hit
+            print(f"\t Player hits for: {hit}")
+            if enemy[0][0] <= 0:
+                print(f"Player wins!"); continue
+            player_turn = False
+        else:
+            hit = int(enemy[0][1] * random.random())
+            player[0][0] -= hit
+            print(f"\t Enemy hits for: {hit}")
+            if player[0][0] <= 0:
+                print(f"Enemy wins!"); continue
+            player_turn = True
+        round += 1
+
+
+player = prepare(hp=15, attack=9, bag=["HP Potion", "Elixir of Swiftness"])
+enemy = prepare(hp=10, attack=10, bag=[])
+
+print(f"Player's stats: {player}")
+print(f"Enemy's stats: {enemy}")
+fight(player, enemy)
+
+
+
 
 """ console:
 Congrats! You've passed the level!
@@ -145,11 +229,11 @@ Congrats! You've passed the level!
         You're here:    'Catacombs F4'
         You've lost:    108 health points.
 
-You have rolled: [6].
-58 * 2.0 =  116.0
-Excellent! Critical hit! You hit for 116.0.
+You have rolled: [1].
+78 * 0.75 =  58.5
+Better luck next time. You hit for 58.5.
 Your inventory:
-[['Sword', 'Wand', 'Axe', 'Zweihänder'], ['Armor Potion', 'Health Potion', 'Courage Potion'], []]       
+[['Sword', 'Wand', 'Axe', 'Zweihänder'], ['Armor Potion', 'Health Potion', 'Courage Potion'], []]
 You have 7 items.
 
 You have found a treasure!
@@ -161,20 +245,66 @@ You have used Armor Potion!
 You have 8 items.
 
 Village
-TOWNSPERSON = [2504]
-MINER = [2425]
-GUARD = [2537]
-NOBLEMAN = [2534]
+TOWNSPERSON = [2475]
+MINER = [2511]
+GUARD = [2525]
+NOBLEMAN = [2489]
 Total: [10000]
 
 Your missions:
-Quests Name: Yorick's Journal    Quests XP: 1060    
-Quests Name: Grand Tournament    Quests XP: 5400    
-Quests Name: Getting Stronger    Quests XP: 640     
+Quests Name: Yorick's Journal    Quests XP: 1060
+Quests Name: Grand Tournament    Quests XP: 5400
+Quests Name: Getting Stronger    Quests XP: 640
 
-You have completed Yorick's Journal for 1060xp.     
+You have completed Yorick's Journal for 1060xp.
 
 Your missions:
-Quests Name: Grand Tournament    Quests XP: 5400    
+Quests Name: Grand Tournament    Quests XP: 5400
 Quests Name: Getting Stronger    Quests XP: 640
+
+
+a wizard is never late
+frodo Baggins
+nor is he early He arrives precisely when he means to
+                                            — Gandalf
+
+
+['a', 'wizard', 'is', 'never', 'late', 'frodo', 'Baggins', 'nor', 'is', 'he', 'early', 'He', 'arrives', 'precisely', 'when', 'he', 'means', 'to', '—', 'Gandalf']
+This quote have 146 letters, and 20 words.
+
+Characters occurances:
+Word: 'It'
+Occured: 1 time/s.
+===
+Word: 'is'
+Occured: 2 time/s.
+===
+Word: 'the'
+Occured: 5 time/s.
+===
+Word: 'job'
+Occured: 1 time/s.
+===
+Word: 'that'
+Occured: 1 time/s.
+===
+Player's stats: ([15, 9], ['HP Potion', 'Elixir of Swiftness'])
+Enemy's stats: ([10, 10], [])
+You attack first! (0.6492307796601187)
+
+================Round 1================
+Player's HP: 15
+Enemy's HP: 10
+         Player hits for: 3
+
+================Round 2================
+Player's HP: 15
+Enemy's HP: 7
+         Enemy hits for: 7
+
+================Round 3================
+Player's HP: 8
+Enemy's HP: 7
+         Player hits for: 8
+Player wins!
 """
