@@ -35,6 +35,10 @@ server_names = [name.lower() for name in servers_info.keys()]
 
 while searching:
     server_name = input("Search by server name: ").lower()
+    if server_name == "quit" or server_name == "q":
+        print(f"Exiting ...")
+        searching = False
+        continue
     if server_name in server_names:
         for name, population in servers_info.items():
             if server_name == name.lower():
@@ -43,6 +47,7 @@ while searching:
     else:
         print(f"Could not find '{server_name}'.")
         server_name = ""
+
 
 """
 Output:
@@ -60,4 +65,7 @@ Search by server name: Golemagg
 
 Search by server name: Heartstriker
 =====[HEARTSTRIKER: 0.0]=====
+
+Search by server name: q
+Exiting ..
 """
