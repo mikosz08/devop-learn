@@ -1,0 +1,87 @@
+Server	Region	Alliance	Horde	Total
+Amnennar    EU  French  244 759 1,003
+Anathema	US West	0	0	0
+Angerforge	US West	409	78	487
+Arcanite Reaper	US West	0	0	0
+Arugal	US Oceanic	4,276	10,490	14,766
+Ashbringer	EU	595	5,024	5,619
+Ashkandi	US East	883	3,888	4,771
+Atiesh	US West	10,535	1,641	12,176
+Auberdine	EU French	8,554	4,261	12,815
+Azuresong	US West	653	381	1,035
+Benediction	US East	30,695	371	31,066
+Bigglesworth	US West	0	0	0
+Blaumeux	US West	0	0	0
+Bloodfang	EU English	0	0	0
+Bloodsail Buccaneers	US East	1,361	198	1,559
+Celebras	EU German	0	0	0
+Deviate Delight	US East	0	0	0
+Dragon’s Call	EU German	0	0	0
+Dragonfang	EU	0	0	0
+Dreadmist	EU English	0	0	0
+Earthfury	US East	641	737	1,378
+Earthshaker	EU English	18,431	0	18,431
+Eranikus	US East	4,373	8,509	12,882
+Everlook	EU German	18,993	633	19,566
+Faerlina	US East	48	27,786	27,786
+Fairbanks	US West	0	0	0
+Felstriker	US Oceanic	0	0	0
+Finkle	EU French	0	0	0
+Firemaw	EU English	27,747	16	27,763
+Flamelash	EU English	0	0	0
+Gandling	EU English	0	0	0
+Gehennas	EU English	0	31,482	31,482
+Giantstalker	EU English	4,009	2,513	6,522
+Golemagg	EU English	38	22,774	22,812
+Grobbulus	US West	12,622	12,978	25,600
+Heartseeker	US East	0	0	0
+Heartstriker	EU German	0	0	0
+Herod	US East	0	0	0
+Hydraxian Waterlords	EU English	99	116	215
+Incendius	US East	0	0	0
+Jin’do	EU English	739	737	1,476
+Judgement	EU English	0	0	0
+Kirtonos	US East	0	0	0
+Kromcrush	US East	0	0	0
+Kurinnax	US West	0	0	0
+Lakeshire	EU German	7,725	1,643	9,368
+Loatheb	US Latin	0	0	0
+Lucifron	EU German	0	0	0
+Maladath	US East	3,392	2,376	5,768
+Mandokir	EU	1,091	2,936	4,027
+Mankrik	US West	110	17,020	17,130
+Mirage Raceway	EU English	7,738	4,054	12,815
+Mograine	EU English	1,345	12,983	14,328
+Myzrael	US West	298	575	873
+Nethergarde Keep	EU English	2,431	1,301	3,732
+Netherwind	US East	0	0	0
+Noggenfogger	EU English	0	0	0
+Old Blanchy	US East	3,492	1,394	4,884
+Pagle	US West	17,017	14	17,031
+Patchwerk	EU German	0	179	179
+Pyrewood Village	EU East	17,111	375	17,486
+Rattlegore	US West	0	0	0
+Razorfen	EU German	2,234	5,532	7,766
+Razorgore	EU English	0	0	0
+Remulos	US Oceanic	2,771	431	3,202
+Shazzrah	EU English	0	0	0
+Skeram	US East	0	0	0
+Skullflame	EU English	0	0	0
+Skyfury	US West	8,748	5,520	14,268
+Smolderweb	US West	0	0	0
+Stalagg	US East	0	0	0
+Stonespine	EU English	0	0	0
+Sulfuras	US East	6,434	11,608	18,042
+Sulfuron	EU French	6,075	10,284	16,359
+Sul’thraze	US Brazil	0	0	0
+Ten Storms	EU English	0	0	0
+Thalnos	US East	0	0	0
+Thekal	EU	8,295	5,737	14,032
+Thunderfury	US West	0	0	0
+Transcendence	EU German	19	2,451	2,470
+Venoxis	EU German	1,093	21,119	22,212
+Westfall	US East	5,758	0	5,758
+Whitemane	US West	0	19,626	19,626
+Windseeker	US East	1,817	2,078	3,895
+Yojamba	US Oceanic	1,714	2,762	4,476
+Zandalar Tribe	EU English	0	0	0
