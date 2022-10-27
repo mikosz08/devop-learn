@@ -1,6 +1,8 @@
 # Search mode to find server and it's population by name.
+from pathlib import Path
+data_file_path = Path("Basics\wow_servers_pop\servers_population.txt")
 
-population = open("D:\Projects\devop-learn\Python\servers_population.txt", 'r')
+population = open(data_file_path, 'r')
 
 print("Reading file ...", end="")
 lines = []
@@ -36,8 +38,26 @@ while searching:
     if server_name in server_names:
         for name, population in servers_info.items():
             if server_name == name.lower():
-                print(f"=====[{name.upper()}: {population}]=====")
+                print(f"=====[{name.upper()}: {population}]=====\n")
                 continue
     else:
         print(f"Could not find '{server_name}'.")
         server_name = ""
+
+"""
+Output:
+
+Reading file ...[OK]
+Creating server-population dictionary ... [OK]
+Sorting dictionary ... [OK]
+
+Most populated server: GEHENNAS with population of 31482.0
+Search by server name: giantstalker
+=====[GIANTSTALKER: 6522.0]=====
+
+Search by server name: Golemagg
+=====[GOLEMAGG: 22812.0]=====
+
+Search by server name: Heartstriker
+=====[HEARTSTRIKER: 0.0]=====
+"""
