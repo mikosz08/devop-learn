@@ -1,5 +1,3 @@
-# hello_world.py
-
 import PySimpleGUI as sg
 from translate_from_binary import translate
 from Utils.cls import clear_console
@@ -47,7 +45,8 @@ def init_layout():
             [
                 sg.Button("To_Binary", size=(buttons_size, None), key='-BtT-'),
                 sg.Exit('Exit', size=(buttons_size, None), key='-EXIT-'),
-                sg.Button("To_Text", size=(buttons_size, None), key='-TtB-', disabled=True)
+                sg.Button("To_Text", size=(buttons_size, None),
+                          key='-TtB-', disabled=True)
             ]
         ])]
 
