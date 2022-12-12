@@ -1,6 +1,14 @@
 """
 Converts binary string to text.
 """
+def translate(input):
+    binary_string = input.replace(" ", "").replace("\n", "")
+    if binary_string_valid(binary_string):
+        binary_string_list = split_binary_to_list(binary_string)
+        print(binary_string_list)
+        return get_text_from_binary(binary_string_list)
+    else:
+        return "Invalid Binary String"
 
 def binary_string_valid(binary_string):
     for char in binary_string:
@@ -29,20 +37,18 @@ def get_text_from_binary(binary_strings):
 
 
 def binary_to_str(b_str):
-    pow = 7
+    power = 7
     base = 2
     dec = 0
+    
     for i in range(0, len(b_str)):
+        print("================")
         bit = int(b_str[i])
-        dec += base**pow*bit
-        pow -= 1
+        dec += base**power*bit
+        print(base**power*bit)
+        power -= 1
+    print(f"Binary:{b_str} = [{dec}] = [{chr(dec)}]")
     return chr(dec)
 
 
-def translate(input):
-    binary_string = input.replace(" ", "").replace("\n", "")
-    if binary_string_valid(binary_string):
-        binary_string_list = split_binary_to_list(binary_string)
-        return get_text_from_binary(binary_string_list)
-    else:
-        return "Invalid Binary String"
+
