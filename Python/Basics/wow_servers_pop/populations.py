@@ -1,6 +1,6 @@
 # Search mode to find server and it's population by name.
 from pathlib import Path
-data_file_path = Path("Basics\wow_servers_pop\servers_population.txt")
+data_file_path = Path("Python\Basics\wow_servers_pop\servers_population.txt")
 
 population = open(data_file_path, 'r')
 
