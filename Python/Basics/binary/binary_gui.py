@@ -179,10 +179,10 @@ class BinGUI:
         centered = [
             [sg.Frame('Options', [
                 [
-                    sg.Button("To_Binary", size=(
+                    sg.Button("To_Text", size=(
                         buttons_size, None), key='-BtT-'),
                     sg.Exit('Exit', size=(buttons_size, None), key='-EXIT-'),
-                    sg.Button("To_Text", size=(buttons_size, None),
+                    sg.Button("To_Binary", size=(buttons_size, None),
                               key='-TtB-', disabled=True)
                 ]
             ])]
