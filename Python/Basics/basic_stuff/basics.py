@@ -24,29 +24,30 @@ time_left = 0.1253432
 
 passed_on_time = True
 luck = random.random()
-if luck > 0.4345765:
+if luck > 0.7345765:
     passed_on_time = False
-
-location_name = "Catacombs F4"
+floor_num = int(luck*100)
+location_name = f"Catacombs {floor_num}"
 location_text = 'You\'re here:\t\'' + location_name + '\''
 
-score = 98769785975
+score = 98_769_785_975
 score_text = "You've earned:\t" + str(score) + " points."
 
 health = 17
 MAX_HEALTH = 125
-health_lost_text = f'You\'ve lost:\t{MAX_HEALTH - health} health points.\n'
+health_lost_str = f'You\'ve lost:\t{MAX_HEALTH - health} health points.\n'
 
 
 # [2]===========================================================================
 if passed_on_time:
-    print("Congrats! You've passed the level!")
-    print('\t' + score_text + '\n\t' + location_text + '\n\t' + health_lost_text)
-elif "F4" in location_name:
+    print("You've passed the level!")
+    print('\t' + score_text + '\n\t' + location_text + '\n\t' + health_lost_str)
+elif floor_num >= 100:
+    print("Congrats! You've beat the game!")
+elif floor_num > 50:
     print("Ahh soo close, good luck next time.")
 else:
     print("Try again.")
-
 
 # [3]===========================================================================
 hit = random.randint(43, 78)
@@ -86,17 +87,19 @@ print("Your inventory:")
 print(eq)
 print(f"You have {len(eq[0]) + len(eq[1]) + len(eq[2])} items.")
 
-print("\nYou have found a treasure!")
+
+
 treausre = ["Gold Ornament", "Magic Sword"]
 other.append(treausre[0])
 weapons.insert(2, treausre[1])
+print(f"\nYou have found a treasure! = {treausre}")
 
-print(eq)
 print(f"You have {len(eq[0]) + len(eq[1]) + len(eq[2])} items.")
+print(eq)
 
 item_used = potions[random.randint(0, len(potions) - 1)]
-print(f"\nYou have used {item_used}!")
 potions.remove(item_used)
+print(f"\nYou have used {item_used}!")
 
 print(eq)
 print(f"You have {len(eq[0]) + len(eq[1]) + len(eq[2])} items.")
@@ -136,18 +139,18 @@ for name, xp in quests.items():
 
 # [7]===========================================================================
 print()
-quote = """
+qutoes = """
 a wizard is never late
 frodo Baggins
 nor is he early He arrives precisely when he means to
                                             — Gandalf
 """
-print(quote + '\n')
-quote_words = quote.split()
+print(qutoes + '\n')
+quote_words = qutoes.split()
 print(quote_words)
-print(f"This quote have {len(quote)} letters, and {len(quote_words)} words.\n")
+print(f"This quote have {len(qutoes)} letters, and {len(quote_words)} words.\n")
 
-quote = """
+qutoes = """
 It is the job that is never started as takes longest to finish 
                                                     - Sam Gamgee
 Even the smallest person can change the course of the future
@@ -156,15 +159,15 @@ I would rather share one lifetime with you than face all the ages of this world 
                                                     - Arwen
 """
 
-words = quote.split()
+words = qutoes.split()
 word_count_dict = {}
 counter = 1
 
-for word in words:
-    if word in word_count_dict:
-        word_count_dict[word] += counter
+for w in words:
+    if w in word_count_dict:
+        word_count_dict[w] += counter
     else:
-        word_count_dict[word] = counter
+        word_count_dict[w] = counter
 
 print("Characters occurances: ")
 loops = 5
@@ -179,6 +182,7 @@ for w, c in word_count_dict.items():
 
 def prepare(hp: int, attack: int, bag: list):
     stats = [hp, attack]
+    bag.sort() # just because
     return stats, bag
 
 def fight(player, enemy):
@@ -224,31 +228,31 @@ fight(player, enemy)
 
 
 """ console:
-Congrats! You've passed the level!
+You've passed the level!
         You've earned:  98769785975 points.
-        You're here:    'Catacombs F4'
+        You're here:    'Catacombs 36'
         You've lost:    108 health points.
 
-You have rolled: [1].
-78 * 0.75 =  58.5
-Better luck next time. You hit for 58.5.
+You have rolled: [6].
+54 * 2.0 =  108.0
+Excellent! Critical hit! You hit for 108.0.
 Your inventory:
 [['Sword', 'Wand', 'Axe', 'Zweihänder'], ['Armor Potion', 'Health Potion', 'Courage Potion'], []]
 You have 7 items.
 
-You have found a treasure!
-[['Sword', 'Wand', 'Magic Sword', 'Axe', 'Zweihänder'], ['Armor Potion', 'Health Potion', 'Courage Potion'], ['Gold Ornament']]
+You have found a treasure! = ['Gold Ornament', 'Magic Sword']
 You have 9 items.
+[['Sword', 'Wand', 'Magic Sword', 'Axe', 'Zweihänder'], ['Armor Potion', 'Health Potion', 'Courage Potion'], ['Gold Ornament']]
 
-You have used Armor Potion!
-[['Sword', 'Wand', 'Magic Sword', 'Axe', 'Zweihänder'], ['Health Potion', 'Courage Potion'], ['Gold Ornament']]
+You have used Health Potion!
+[['Sword', 'Wand', 'Magic Sword', 'Axe', 'Zweihänder'], ['Armor Potion', 'Courage Potion'], ['Gold Ornament']]
 You have 8 items.
 
 Village
-TOWNSPERSON = [2475]
-MINER = [2511]
-GUARD = [2525]
-NOBLEMAN = [2489]
+TOWNSPERSON = [2509]
+MINER = [2476]
+GUARD = [2522]
+NOBLEMAN = [2493]
 Total: [10000]
 
 Your missions:
@@ -288,23 +292,48 @@ Occured: 1 time/s.
 Word: 'that'
 Occured: 1 time/s.
 ===
-Player's stats: ([15, 9], ['HP Potion', 'Elixir of Swiftness'])
+Player's stats: ([15, 9], ['Elixir of Swiftness', 'HP Potion'])
 Enemy's stats: ([10, 10], [])
-You attack first! (0.6492307796601187)
+Enemy starts. (0.2681882261539472)
 
 ================Round 1================
 Player's HP: 15
 Enemy's HP: 10
-         Player hits for: 3
+         Enemy hits for: 6
 
 ================Round 2================
-Player's HP: 15
-Enemy's HP: 7
-         Enemy hits for: 7
+Player's HP: 9
+Enemy's HP: 10
+         Player hits for: 0
 
 ================Round 3================
-Player's HP: 8
-Enemy's HP: 7
+Player's HP: 9
+Enemy's HP: 10
+         Enemy hits for: 6
+
+================Round 4================
+Player's HP: 3
+Enemy's HP: 10
+         Player hits for: 1
+
+================Round 5================
+Player's HP: 3
+Enemy's HP: 9
+         Enemy hits for: 1
+
+================Round 6================
+Player's HP: 2
+Enemy's HP: 9
          Player hits for: 8
+
+================Round 7================
+Player's HP: 2
+Enemy's HP: 1
+         Enemy hits for: 1
+
+================Round 8================
+Player's HP: 1
+Enemy's HP: 1
+         Player hits for: 2
 Player wins!
 """
