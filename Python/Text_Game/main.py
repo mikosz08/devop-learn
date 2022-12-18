@@ -1,6 +1,6 @@
-from GameBrain.game import Game
-from Utils.clear_screen import cls
-
+from utils.clear_screen import cls
+from brain.Game import Game
 if __name__ == "__main__":
     cls()
-    g = Game()
+    Game()
+    print("exit")
