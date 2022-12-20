@@ -1,6 +1,9 @@
 #envs
+.gitignore
 Python/envs/
 /exclude/
+Python/Text_Game/persistance/GameSaves/
+Python/Text_Game/Diagrams/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
