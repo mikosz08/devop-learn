@@ -1,0 +1,1 @@
+ENTITIES_FILE_PATH="persistance\GameSaves\ENTITIES"
