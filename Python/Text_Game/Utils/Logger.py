@@ -1,12 +1,12 @@
 from utils.Log import Log
 
-class Logger(Log):
+class Logger():
 
     logs = []
 
     @classmethod
     def log_message(cls, message) -> str():
-        Logger.append_log(cls, f"|LOG|{Log(message)}")
+        Logger.append_log(cls, f"\t|LOG|{Log(message)}")
 
     @classmethod
     def log_value(cls, value) -> str():
@@ -18,4 +18,4 @@ class Logger(Log):
             print(f"{log}", end=f'\n')
 
     def append_log(self, log):
-        Logger.logs.append(f"@\n{log}")
+        Logger.logs.append(f"{log}")
