@@ -1,4 +1,5 @@
-from enum import Enum
+from data.default_entity_data import *
+
 
 class Stats():
     def __init__(self) -> None:
@@ -11,23 +12,15 @@ class Stats():
         self.DEF = DEFAULT_DEF
         self.RACE = DEFAULT_RACE
 
-class Race(Enum):
-    HUMAN = 1
-    ORC = 2
-    NAZIR = 3
-
-class CharacterClass(Enum):
-    WARRIOR = 1
-    WARLOCK = 2
-    SCOUNDREL = 3
-
-DEFAULT_NAME = f"Bob"
-DEFAULT_LEVEL = 1
-DEFAULT_HP = 100
-DEFAULT_MP = 100
-DEFAULT_ATT = 10
-DEFAULT_DEF = 10
-DEFAULT_SPD = 10
-
-DEFAULT_RACE = Race(1)
-DEFAULT_CHARACTER_CLASS = CharacterClass(1)
+    def __str__(self) -> str:
+        return f"""
+===CHARACTER INFO===
+NAME: {self.NAME}
+LEVEL: {self.LEVEL}
+HP: {self.HP}
+MP: {self.MP}
+ATT: {self.ATT}
+SPD: {self.SPD}
+DEF: {self.DEF}
+RACE: {self.RACE.name}
+"""
