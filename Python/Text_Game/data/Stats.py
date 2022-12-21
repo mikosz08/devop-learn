@@ -1,4 +1,4 @@
-from data.default_entity_data import *
+from data.default_statistics import *
 
 
 class Stats():

@@ -1,5 +1,5 @@
 from data.Stats import Stats
-from data.default_entity_data import DEFAULT_CHARACTER_CLASS
+from data.default_statistics import DEFAULT_CHARACTER_CLASS
 
 
 class PlayerStats(Stats):
