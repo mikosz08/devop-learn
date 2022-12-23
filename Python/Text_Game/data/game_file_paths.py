@@ -1,1 +1,4 @@
-ENTITIES_FILE_PATH="persistance\GameSaves\ENTITIES"
+import os
+ 
+path = ""
+ENTITIES_FILE_PATH = os.path.join(path, "data\persistance\GameSaves\\", "ENTITIES")

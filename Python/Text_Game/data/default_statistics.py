@@ -1,5 +1,5 @@
-from data.Race import Race
-from data.CharacterClass import CharacterClass
+from characters.Race import Race
+from characters.player.PlayerClass import CharacterClass
 
 # Entity
 DEFAULT_NAME = f"Bob"

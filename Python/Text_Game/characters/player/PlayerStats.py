@@ -1,4 +1,4 @@
-from data.Stats import Stats
+from characters.Stats import Stats
 from data.default_statistics import DEFAULT_CHARACTER_CLASS
 
 

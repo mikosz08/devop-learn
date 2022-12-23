@@ -1,7 +1,8 @@
 from data.default_statistics import *
+from abc import ABC
 
 
-class Stats():
+class Stats(ABC):
     def __init__(self) -> None:
         self.NAME = DEFAULT_NAME
         self.LEVEL = DEFAULT_LEVEL
