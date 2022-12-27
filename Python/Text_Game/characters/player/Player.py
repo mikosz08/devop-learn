@@ -8,10 +8,6 @@ class Player(Entity):
 
     def __init__(self, player_stats: PlayerStats) -> None:
         super().__init__(player_stats)
-        
-        Persistance.save(self, paths.ENTITIES_FILE_PATH)
-        Persistance.load(paths.ENTITIES_FILE_PATH)
-        
-    
+
     def get_stats(self) -> PlayerStats:
-            return self.stats
+        return self.stats
