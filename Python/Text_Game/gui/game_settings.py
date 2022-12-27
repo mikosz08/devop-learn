@@ -1,0 +1,4 @@
+
+WIN_WIDTH, WIN_HEIGHT = 900, 500
+FPS = 30
+WIN_TITLE = "text_game"
