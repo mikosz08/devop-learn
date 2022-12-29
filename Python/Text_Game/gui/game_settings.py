@@ -1,4 +1,51 @@
+from pygame import font
 
 WIN_WIDTH, WIN_HEIGHT = 900, 500
 FPS = 30
 WIN_TITLE = "text_game"
+TEXT_FONT_DEFAULT = font.get_default_font()
+TEXT_FONT_CONSOLAS = "Consolas"
+
+# TEXT & COLORS:
+C_WHITE = (255, 255, 255)
+C_BLACK = (0, 0, 0)
+
+C_RED = (255, 0, 0)
+C_GREEN = (0, 255, 0)
+C_BLUE = (0, 0, 255)
+
+ANTIALIASING_THRESHOLD = 15
+
+# CORDS:
+POS_OFFSET = 35
+WIN_MIDDLE_POS = (WIN_WIDTH/2, WIN_HEIGHT/2)
+
+WIN_BOTTOM_RIGHT_POS = (WIN_WIDTH - POS_OFFSET, WIN_HEIGHT - POS_OFFSET)
+WIN_BOTTOM_LEFT_POS = (POS_OFFSET, WIN_HEIGHT - POS_OFFSET)
+
+WIN_TOP_RIGHT_POS = (WIN_WIDTH - POS_OFFSET, POS_OFFSET)
+WIN_TOP_LEFT_POS = (POS_OFFSET, POS_OFFSET)
+
+WIN_TOP_POS = (WIN_WIDTH/2, POS_OFFSET)
+WIN_BOTTOM_POS = (WIN_WIDTH/2, WIN_HEIGHT - POS_OFFSET)
+
+WIN_RIGHT_POS = (WIN_WIDTH - POS_OFFSET, WIN_HEIGHT/2)
+WIN_LEFT_POS = (POS_OFFSET, WIN_HEIGHT/2)
+
+WIN_POSITIONS = (
+    WIN_TOP_LEFT_POS,
+    WIN_TOP_POS,
+    WIN_TOP_RIGHT_POS,
+    WIN_RIGHT_POS,
+    WIN_BOTTOM_RIGHT_POS,
+    WIN_BOTTOM_POS,
+    WIN_BOTTOM_LEFT_POS,
+    WIN_LEFT_POS,
+    WIN_MIDDLE_POS
+)
+
+
+def adjust_pos(pos, width=0, height=0, width_height_tuple=None) -> tuple:
+    if width_height_tuple != None:
+        width, height = width_height_tuple
+    return (pos[0] + width, pos[1] + height)
