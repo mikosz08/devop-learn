@@ -129,6 +129,6 @@ class Gui():
         pygame.quit()
 
 
-class de(Enum):
-    START = "Start"
-    QUIT = "Quit"
+# class de(Enum):
+#     START = "Start"
+#     QUIT = "Quit"
