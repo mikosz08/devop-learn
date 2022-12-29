@@ -81,7 +81,6 @@ class Gui():
             if rect.collidepoint(pos):
                 if self.game_state == IN_MAIN_MENU:
                     if button.tag == "Start" and pygame.mouse.get_pressed()[0] == 1:
-                        print("oops")
                         self.change_state(IN_START_MENU)
                     elif button.tag == "Quit" and pygame.mouse.get_pressed()[0] == 1:
                         self.change_state(QUIT)
