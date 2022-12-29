@@ -1,10 +1,8 @@
-from enum import Enum
 import pygame
-from gui.game_settings import *
 from gui.Text import Text
 from utils.Logger import Logger
 from gui.game_states import *
-
+from gui.game_settings import *
 
 class Gui():
 
@@ -49,8 +47,8 @@ class Gui():
             pos = (pos[0], pos[1] + offset)
 
     def draw_game_title(self):
-        fps_text = Text(WIN_TITLE, 56, C_WHITE)
-        fps_text.draw_centered(self.main_surface, WIN_BOTTOM_RIGHT_POS)
+        title_text = Text(WIN_TITLE, 56, C_WHITE)
+        title_text.draw_centered(self.main_surface, adjust_pos(WIN_TOP_POS, 0, 35))
 
     def draw_fps(self):
         fps = int(self.clock.get_fps())
@@ -116,6 +114,7 @@ class Gui():
             if self.game_state == IN_MAIN_MENU and self.state_entered == False:
                 Logger.log_message("Drew menu buttons")
                 # TODO: Wynieść do klasy Menu
+                self.draw_game_title()
                 self.draw_menu()
                 self.state_entered = True
             elif self.game_state == IN_START_MENU:
@@ -128,7 +127,3 @@ class Gui():
 
         pygame.quit()
 
-
-# class de(Enum):
-#     START = "Start"
-#     QUIT = "Quit"
