@@ -79,11 +79,19 @@ class Gui():
         for button in self.menu_buttons:
             rect = button.rect
             if rect.collidepoint(pos):
-                if button.tag == "Start" and pygame.mouse.get_pressed()[0] == 1:
-                    self.change_state(IN_START_MENU)
-                elif button.tag == "Quit" and pygame.mouse.get_pressed()[0] == 1:
-                    self.change_state(QUIT)
-                else:
+                if self.game_state == IN_MAIN_MENU:
+                    if button.tag == "Start" and pygame.mouse.get_pressed()[0] == 1:
+                        print("oops")
+                        self.change_state(IN_START_MENU)
+                    elif button.tag == "Quit" and pygame.mouse.get_pressed()[0] == 1:
+                        self.change_state(QUIT)
+                    else:
+                        pass
+                elif self.game_state == IN_START_MENU:
+                    pass
+                elif self.game_state == IN_CHARACTER_CREATION:
+                    pass
+                elif self.game_state == IN_GAME:
                     pass
 
     def draw_utils(self):
@@ -101,8 +109,6 @@ class Gui():
 
     def main_loop(self):
 
-        self.state_entered = False
-
         while (self.running):
 
             # Check events:
@@ -111,14 +117,16 @@ class Gui():
                 if event.type == pygame.QUIT:
                     self.running = False
 
-            if self.game_state == IN_MAIN_MENU and self.state_entered == False:
-                Logger.log_message("Drew menu buttons")
+            if self.game_state == IN_MAIN_MENU and not self.state_entered:
                 # TODO: Wynieść do klasy Menu
                 self.draw_game_title()
                 self.draw_menu()
                 self.state_entered = True
-            elif self.game_state == IN_START_MENU:
+                Logger.log_message("Entered Main Menu")
+            elif self.game_state == IN_START_MENU and not self.state_entered: 
                 self.main_surface.fill(C_BLACK)
+                self.state_entered = True
+                Logger.log_message("Entered Start Menu")
             elif self.game_state == QUIT:
                 self.running = False
 
