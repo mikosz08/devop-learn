@@ -1,6 +1,6 @@
-from Utils.Logger import Logger
-from Utils.clear_screen import cls
-from brain.Game import Game
+from utils.Logger import Logger
+from utils.clear_screen import cls
+from game.Game import Game
 
 if __name__ == "__main__":
     cls()
