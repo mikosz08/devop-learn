@@ -1,4 +1,4 @@
-from utils.Log import Log
+from Utils.Log import Log
 
 class Logger():
 

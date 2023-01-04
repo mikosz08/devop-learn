@@ -1,6 +1,6 @@
 import pygame
 from gui.Text import Text
-from utils.Logger import Logger
+from Utils.Logger import Logger
 from gui.game_states import *
 from gui.game_settings import *
 

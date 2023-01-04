@@ -2,7 +2,7 @@
 from characters.player.Player import Player
 from characters.player.PlayerStats import PlayerStats
 from data.default_statistics import *
-from utils.Logger import Logger
+from Utils.Logger import Logger
 
 import unittest
 
