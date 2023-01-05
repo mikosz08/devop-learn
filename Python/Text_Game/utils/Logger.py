@@ -14,8 +14,10 @@ class Logger():
 
     @classmethod
     def print_logs(cls):
+        print("Logs history:")
         for log in Logger.logs:
             print(f"{log}", end=f'\n')
 
     def append_log(self, log):
+        print(f'Saved log: {log}')
         Logger.logs.append(f"{log}")
