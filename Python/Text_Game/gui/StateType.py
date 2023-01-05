@@ -2,8 +2,9 @@ from enum import Enum
 
 
 class StateType(Enum):
-    IN_MAIN_MENU="in_main_menu"
-    IN_START_MENU="in_start_menu"
-    IN_CHARACTER_CREATION="in_character_creation"
-    IN_GAME="in_game"
-    QUIT="quit"
+    IN_MAIN_MENU = 1
+    IN_START_MENU = 2
+    IN_CREDITS_MENU = 3
+    IN_CHARACTER_CREATION = 4
+    IN_GAME = 5
+    IN_QUIT = 6
