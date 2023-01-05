@@ -3,6 +3,7 @@ from gui.Text import Text
 from utils.Logger import Logger
 from gui.StateType import StateType
 from gui.game_settings import *
+from gui.ButtonTags import ButtonType
 
 
 class Gui():
@@ -26,15 +27,13 @@ class Gui():
         # Is game running:
         self.running = True
         self.change_state(StateType.IN_MAIN_MENU)
-        Logger.log_message("Game loop starts")
-
-    def tick(self):
-        self.clock.tick(self.fps)
 
     # Wynieśc do klasy Menu
     def draw_menu(self):
         self.menu_buttons = list()
-        text_size_dict = {'Start': 46, 'Quit': 36, 'Credits': 26}
+        text_size_dict = {ButtonType.START_BUTTON.value: 46,
+                          ButtonType.QUIT_BUTTON.value: 36,
+                          ButtonType.CREDITS_BUTTON.value: 26}
         offset = 50
         pos = WINDOW_CENTER_POS
         for button_text in text_size_dict:
@@ -80,37 +79,49 @@ class Gui():
 
             pos_char += 1
 
+    # Przyciski tez będą sprawdzane w zależności od StateType -
+    # każdy 'zbiór' elementów interfejsu będzie miał dedykowaną klasę
+
     def check_buttons(self):
-        pos = pygame.mouse.get_pos()
-        for button in self.menu_buttons:
-            rect = button.rect
-            mouse_pressed = pygame.mouse.get_pressed()[0] == 1
-            collision_detected = rect.collidepoint(pos)
+        match self.game_state:
+            case StateType.IN_MAIN_MENU:
 
-            if collision_detected and mouse_pressed:
+                for button in self.menu_buttons:
+                    pos = pygame.mouse.get_pos()
+                    mouse_pressed = pygame.mouse.get_pressed()[0] == 1
+                    collision_detected = button.rect.collidepoint(pos)
+                    if collision_detected and mouse_pressed:
+                        match button.tag:
+                            case ButtonType.START_BUTTON.value:
+                                self.change_state(StateType.IN_START_MENU)
+                            case ButtonType.CREDITS_BUTTON.value:
+                                self.change_state(StateType.IN_CREDITS_MENU)
+                            case ButtonType.QUIT_BUTTON.value:
+                                self.change_state(StateType.IN_QUIT)
 
-                if self.game_state == StateType.IN_MAIN_MENU:
-
-                    if button.tag == "Start":
-                        self.change_state(StateType.IN_START_MENU)
-                    elif button.tag == "Quit":
-                        self.change_state(StateType.QUIT)
-                    else:
-                        print('h')
-
-                elif self.game_state == StateType.IN_START_MENU:
-                    pass
-
-                elif self.game_state == StateType.IN_CHARACTER_CREATION:
-                    pass
-
-                elif self.game_state == StateType.IN_GAME:
-                    pass
+            case StateType.IN_START_MENU:
+                pass
+            case StateType.IN_CREDITS_MENU:
+                pass
+            case StateType.IN_GAME:
+                pass
 
     # Wynieść do klasy State
+
     def change_state(self, state):
         self.game_state = state
-        self.state_entered = False
+
+        if self.game_state == StateType.IN_MAIN_MENU:
+            self.draw_game_title()  # wyniesc do klasy GameTitle
+            self.draw_menu()  # wyniesc do klasy Menu itd / Menu.draw()
+            Logger.log_message("Entered Main Menu")
+        elif self.game_state == StateType.IN_START_MENU:
+            self.main_surface.fill(C_BLACK)
+            self.draw_game_title()
+            Logger.log_message("Entered Start Menu")
+        elif self.game_state == StateType.IN_QUIT:
+            Logger.log_message("Entered Quit Menu")
+            self.running = False
 
     def check_events(self):
         events = pygame.event.get()
@@ -122,32 +133,13 @@ class Gui():
         self.draw_window_positions()
         self.draw_fps()
 
-    def check_gui_state(self):
-        if self.state_entered: 
-            return
-        
-
-        
-        if self.game_state == StateType.IN_MAIN_MENU:
-            self.draw_game_title() # z klasy GameTitle
-            self.draw_menu() # z klasy Menu
-            self.state_entered = True
-            Logger.log_message("Entered Main Menu")
-        elif self.game_state == StateType.IN_START_MENU:
-            self.main_surface.fill(C_BLACK)
-            self.state_entered = True
-            Logger.log_message("Entered Start Menu")
-        elif self.game_state == StateType.QUIT:
-            self.running = False
-
     def update(self):
         self.main_display.update()
-        self.tick()
+        self.clock.tick(self.fps)
 
     def main_loop(self):
         while (self.running):
             self.check_events()
-            self.check_gui_state()
             self.check_buttons()
             self.draw_utils()
             self.update()
