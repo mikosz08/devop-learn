@@ -1,8 +1,9 @@
 import pygame
 from gui.Text import Text
 from utils.Logger import Logger
-from gui.game_states import *
+from gui.StateType import StateType
 from gui.game_settings import *
+
 
 class Gui():
 
@@ -24,17 +25,18 @@ class Gui():
         self.main_surface = self.main_display.get_surface()
         # Is game running:
         self.running = True
-        self.change_state(IN_MAIN_MENU)
+        self.change_state(StateType.IN_MAIN_MENU)
         Logger.log_message("Game loop starts")
 
     def tick(self):
         self.clock.tick(self.fps)
 
+    # Wynieśc do klasy Menu
     def draw_menu(self):
         self.menu_buttons = list()
         text_size_dict = {'Start': 46, 'Quit': 36, 'Credits': 26}
         offset = 50
-        pos = WIN_MIDDLE_POS
+        pos = WINDOW_CENTER_POS
         for button_text in text_size_dict:
             # Create Button:
             text_tag = button_text.split()[0]
@@ -46,26 +48,30 @@ class Gui():
             # Update position:
             pos = (pos[0], pos[1] + offset)
 
+    # Wynieśc do klasy GameTitle
     def draw_game_title(self):
         title_text = Text(WIN_TITLE, 56, C_WHITE)
-        title_text.draw_centered(self.main_surface, adjust_pos(WIN_TOP_POS, 0, 35))
+        title_text.draw_centered(
+            self.main_surface, adjust_pos(WINDOW_TOP_POS, 0, 35))
 
+    # Wynieśc do klasy UtilityDraw
     def draw_fps(self):
         fps = int(self.clock.get_fps())
         fps = "{:.1f}".format(fps)
-        # print("tutaj")
         fps_text = Text(fps, 15, C_WHITE, "FPS")
-        
+
         clear_rect_size = (-6, 14)
         clear_rect_pos = fps_text.rect
         clear_rect_pos.x, clear_rect_pos.y = adjust_pos(
-            WIN_BOTTOM_RIGHT_POS, width_height_tuple=clear_rect_size)
-        rect = pygame.Rect((clear_rect_pos.x,clear_rect_pos.y,33,15))
+            WINDOW_BOTTOM_RIGHT_POS, width_height_tuple=clear_rect_size)
+        rect = pygame.Rect((clear_rect_pos.x, clear_rect_pos.y, 33, 15))
         pygame.draw.rect(self.main_surface, C_BLACK, rect)
 
-        fps_text.draw_centered(self.main_surface, adjust_pos(WIN_BOTTOM_RIGHT_POS, 10, 20))
+        fps_text.draw_centered(self.main_surface, adjust_pos(
+            WINDOW_BOTTOM_RIGHT_POS, 10, 20))
 
-    def draw_positions(self):
+    # Wynieśc do klasy UtilityDraw
+    def draw_window_positions(self):
         pos_char = ord('A')
         for pos in WIN_POSITIONS:
             # Draw character representing the position:
@@ -78,59 +84,71 @@ class Gui():
         pos = pygame.mouse.get_pos()
         for button in self.menu_buttons:
             rect = button.rect
-            if rect.collidepoint(pos):
-                if self.game_state == IN_MAIN_MENU:
-                    if button.tag == "Start" and pygame.mouse.get_pressed()[0] == 1:
-                        self.change_state(IN_START_MENU)
-                    elif button.tag == "Quit" and pygame.mouse.get_pressed()[0] == 1:
-                        self.change_state(QUIT)
+            mouse_pressed = pygame.mouse.get_pressed()[0] == 1
+            collision_detected = rect.collidepoint(pos)
+
+            if collision_detected and mouse_pressed:
+
+                if self.game_state == StateType.IN_MAIN_MENU:
+
+                    if button.tag == "Start":
+                        self.change_state(StateType.IN_START_MENU)
+                    elif button.tag == "Quit":
+                        self.change_state(StateType.QUIT)
                     else:
-                        pass
-                elif self.game_state == IN_START_MENU:
-                    pass
-                elif self.game_state == IN_CHARACTER_CREATION:
-                    pass
-                elif self.game_state == IN_GAME:
+                        print('h')
+
+                elif self.game_state == StateType.IN_START_MENU:
                     pass
 
-    def draw_utils(self):
-        self.draw_positions()
-        self.draw_fps()
+                elif self.game_state == StateType.IN_CHARACTER_CREATION:
+                    pass
 
-    def update(self):
-        self.check_buttons()
-        self.main_display.update()
-        self.tick()
+                elif self.game_state == StateType.IN_GAME:
+                    pass
 
+    # Wynieść do klasy State
     def change_state(self, state):
         self.game_state = state
         self.state_entered = False
 
-    def main_loop(self):
-
-        while (self.running):
-
-            # Check events:
-            events = pygame.event.get()
-            for event in events:
-                if event.type == pygame.QUIT:
-                    self.running = False
-
-            if self.game_state == IN_MAIN_MENU and not self.state_entered:
-                # TODO: Wynieść do klasy Menu
-                self.draw_game_title()
-                self.draw_menu()
-                self.state_entered = True
-                Logger.log_message("Entered Main Menu")
-            elif self.game_state == IN_START_MENU and not self.state_entered: 
-                self.main_surface.fill(C_BLACK)
-                self.state_entered = True
-                Logger.log_message("Entered Start Menu")
-            elif self.game_state == QUIT:
+    def check_events(self):
+        events = pygame.event.get()
+        for event in events:
+            if event.type == pygame.QUIT:
                 self.running = False
 
+    def draw_utils(self):
+        self.draw_window_positions()
+        self.draw_fps()
+
+    def check_gui_state(self):
+        if self.state_entered: 
+            return
+        
+
+        
+        if self.game_state == StateType.IN_MAIN_MENU:
+            self.draw_game_title() # z klasy GameTitle
+            self.draw_menu() # z klasy Menu
+            self.state_entered = True
+            Logger.log_message("Entered Main Menu")
+        elif self.game_state == StateType.IN_START_MENU:
+            self.main_surface.fill(C_BLACK)
+            self.state_entered = True
+            Logger.log_message("Entered Start Menu")
+        elif self.game_state == StateType.QUIT:
+            self.running = False
+
+    def update(self):
+        self.main_display.update()
+        self.tick()
+
+    def main_loop(self):
+        while (self.running):
+            self.check_events()
+            self.check_gui_state()
+            self.check_buttons()
             self.draw_utils()
             self.update()
-
         pygame.quit()
-
