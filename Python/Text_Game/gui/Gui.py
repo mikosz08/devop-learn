@@ -1,11 +1,11 @@
 import pygame
 from gui.MainMenu import MainMenu
+from gui.StartMenu import StartMenu
 from gui.StateManager import StateManager
 from gui.Text import Text
-from utils.Logger import Logger
 from gui.types.StateType import StateType
 from gui.game_settings import *
-from gui.types.ButtonType import ButtonType
+from utils.Logger import Logger
 
 
 class Gui():
@@ -34,7 +34,73 @@ class Gui():
         # Draw:
         self.draw()
 
-    # Wynieśc do klasy UtilityDraw
+    def draw(self):
+        self.fill_black()
+        game_state = self.state_manager.get_game_state()
+        match game_state:
+            case StateType.IN_MAIN_MENU:
+                self.main_menu = MainMenu(self.main_surface)
+                self.main_menu.draw_main_menu()
+                Logger.log_message("Entered Main Menu")
+
+            case StateType.IN_START_MENU:
+                self.start_menu = StartMenu(self.main_surface)
+                self.start_menu.draw_start_menu()
+                Logger.log_message("Entered Start Menu")
+
+            case StateType.IN_CREDITS_MENU:
+                self.main_surface.fill(C_NAVY)
+                Logger.log_message("Entered Credits Menu")
+
+            case StateType.IN_QUIT_MENU:
+                Logger.log_message("Entered Quit Menu")
+
+    def check_events(self):
+        events = pygame.event.get()
+        for event in events:
+            if event.type == pygame.QUIT:
+                self.running = False
+
+    def check_state(self):
+        mouse_pressed = pygame.mouse.get_pressed()[0] == 1
+        if mouse_pressed:
+            current_state = self.state_manager.get_game_state()
+            match current_state:
+                case StateType.IN_MAIN_MENU:
+                    new_state = self.main_menu.check_main_menu_buttons()
+                    if new_state != None:
+                        self.state_manager.set_game_state(new_state)
+                        self.draw()
+                case StateType.IN_START_MENU:
+                    pass
+                case StateType.IN_CREDITS_MENU:
+                    pass
+                case StateType.IN_QUIT_MENU:
+                    self.running = False
+                case StateType.IN_GAME:
+                    pass
+
+    def fill_black(self):
+        self.main_surface.fill(C_BLACK)
+
+    def draw_utils(self):
+        self.draw_window_positions()
+        self.draw_fps()
+
+    def update(self):
+        self.main_display.update()
+        self.clock.tick(self.fps)
+
+    def main_loop(self):
+        while (self.running):
+            self.check_events()
+            self.check_state()
+            # self.draw_utils()
+            self.update()
+        pygame.quit()
+
+# Utils
+# Wynieśc do klasy UtilityDraw
     def draw_fps(self):
         # Create fps_text Text object:
         fps = int(self.clock.get_fps())
@@ -62,72 +128,3 @@ class Gui():
             text = Text(f"{chr(pos_char)}", 15, C_GREEN, "")
             text.draw(self.main_surface, pos)
             pos_char += 1
-
-    def check_buttons(self):
-        match self.state_manager.get_game_state():
-            case StateType.IN_MAIN_MENU:
-
-                for button in self.main_menu.get_menu_buttons():
-                    pos = pygame.mouse.get_pos()
-                    mouse_pressed = pygame.mouse.get_pressed()[0] == 1
-                    collision_detected = button.rect.collidepoint(pos)
-                    if collision_detected and mouse_pressed:
-                        sm = self.state_manager
-                        match button.tag:
-                            case ButtonType.START_BUTTON.value:
-                                sm.set_game_state(StateType.IN_START_MENU)
-                                self.draw()
-                            case ButtonType.CREDITS_BUTTON.value:
-                                sm.set_game_state(StateType.IN_CREDITS_MENU)
-                                self.draw()
-                            case ButtonType.QUIT_BUTTON.value:
-                                sm.set_game_state(StateType.IN_QUIT)
-                                self.draw()
-
-            case StateType.IN_START_MENU:
-                pass
-            case StateType.IN_CREDITS_MENU:
-                pass
-            case StateType.IN_GAME:
-                pass
-
-    def draw(self):
-        game_state = self.state_manager.get_game_state()
-        match game_state:
-            case StateType.IN_MAIN_MENU:
-                self.main_menu = MainMenu(self.main_surface).draw()
-                Logger.log_message("Entered Main Menu")
-
-            case StateType.IN_START_MENU:
-                self.main_surface.fill(C_BLACK)
-                Logger.log_message("Entered Start Menu")
-
-            case StateType.IN_CREDITS_MENU:
-                self.main_surface.fill(C_RED)
-                Logger.log_message("Entered Credits Menu")
-
-            case StateType.IN_QUIT:
-                self.running = False
-                Logger.log_message("Entered Quit Menu")
-
-    def check_events(self):
-        events = pygame.event.get()
-        for event in events:
-            if event.type == pygame.QUIT:
-                self.running = False
-
-    def draw_utils(self):
-        self.draw_window_positions()
-        self.draw_fps()
-
-    def update(self):
-        self.main_display.update()
-        self.clock.tick(self.fps)
-
-    def main_loop(self):
-        while (self.running):
-            self.check_events()
-            self.check_buttons()
-            self.draw_utils()
-            self.update()
-        pygame.quit()
