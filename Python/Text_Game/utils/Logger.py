@@ -1,5 +1,6 @@
 from utils.Log import Log
 
+
 class Logger():
 
     logs = []
