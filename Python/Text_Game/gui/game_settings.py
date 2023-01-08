@@ -45,7 +45,5 @@ WIN_POSITIONS = (
 )
 
 
-def adjust_pos(pos, width=0, height=0, width_height_tuple=None) -> tuple:
-    if width_height_tuple != None:
-        width, height = width_height_tuple
+def adjust_pos(pos, width=0, height=0) -> tuple:
     return (pos[0] + width, pos[1] + height)
