@@ -8,6 +8,6 @@ class ButtonType(Enum):
     CREDITS_BUTTON = "Credits"
     # Start Menu
     NEW_GAME_BUTTON = "New Game"
-    CONTINUE_BUTTON = "Continue Adventure"
+    CONTINUE_BUTTON = "Continue"
     BACK_BUTTON = "Back"
     

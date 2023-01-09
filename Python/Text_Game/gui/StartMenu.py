@@ -12,7 +12,7 @@ class StartMenu(Menu):
 
     def draw_start_menu_buttons(self):
         text_size_dict = {ButtonType.CONTINUE_BUTTON.value: 46,
-                          ButtonType.NEW_GAME_BUTTON.value: 46,
+                          ButtonType.NEW_GAME_BUTTON.value: 40,
                           ButtonType.BACK_BUTTON.value: 36}
         self.main_menu_buttons = self.create_buttons(
             text_size_dict, 50, WINDOW_CENTER_POS)
