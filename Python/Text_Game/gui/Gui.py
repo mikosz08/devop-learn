@@ -1,9 +1,11 @@
 import pygame
+from gui.Button import Button
+from gui.menus.CreditsMenu import CreditsMenu
 from gui.menus.MainMenu import MainMenu
 from gui.menus.StartMenu import StartMenu
-
 from gui.StateManager import StateManager
 from gui.Text import Text
+from gui.types.ButtonType import *
 from gui.types.StateType import StateType
 from gui.game_settings import *
 from utils.Logger import Logger
@@ -40,20 +42,26 @@ class Gui():
         game_state = self.state_manager.get_game_state()
         match game_state:
             case StateType.IN_MAIN_MENU:
-                self.current_menu = MainMenu(self.main_surface)
+                self.current_menu = MainMenu(
+                    self.main_surface, MAIN_MENU_BUTTONS)
                 self.current_menu.draw_menu()
                 Logger.log_message("Entered Main Menu")
 
             case StateType.IN_START_MENU:
-                self.current_menu = StartMenu(self.main_surface)
+                self.current_menu = StartMenu(
+                    self.main_surface, START_MENU_BUTTONS)
                 self.current_menu.draw_menu()
                 Logger.log_message("Entered Start Menu")
 
             case StateType.IN_CREDITS_MENU:
-                self.main_surface.fill(C_NAVY)
+                print("tutaj")
+                self.current_menu = CreditsMenu(
+                    self.main_surface, CREDITS_MENU_BUTTONS)
+                self.current_menu.draw_menu()
                 Logger.log_message("Entered Credits Menu")
 
             case StateType.IN_QUIT_MENU:
+                self.running = False
                 Logger.log_message("Entered Quit Menu")
 
     def check_events(self):
@@ -61,29 +69,14 @@ class Gui():
         for event in events:
             if event.type == pygame.QUIT:
                 self.running = False
+            if event.type == pygame.MOUSEBUTTONUP and self.state_manager.game_state != StateType.IN_GAME:
+                button_clicked = self.current_menu.check_menu_buttons()
+                if button_clicked != None:
+                    self.set_game_state(button_clicked)
 
-    def check_state(self):
-        mouse_pressed = pygame.mouse.get_pressed()[0] == 1
-        if mouse_pressed:
-            new_state = self.current_menu.check_menu_buttons()
-            if new_state != StateType.EMPTY_STATE:
-                self.state_manager.set_game_state(new_state)
-                self.draw()
-                
-            # current_state = self.state_manager.get_game_state()    
-            # match current_state:
-            #     case StateType.IN_MAIN_MENU:
-            #         if new_state != None:
-            #             self.state_manager.set_game_state(new_state)
-            #             self.draw()
-            #     case StateType.IN_START_MENU:
-            #         pass
-            #     case StateType.IN_CREDITS_MENU:
-            #         pass
-            #     case StateType.IN_QUIT_MENU:
-            #         self.running = False
-            #     case StateType.IN_GAME:
-            #         pass
+    def set_game_state(self, new_state):
+        self.state_manager.set_game_state(new_state)
+        self.draw()
 
     def fill_black(self):
         self.main_surface.fill(C_BLACK)
@@ -99,8 +92,7 @@ class Gui():
     def main_loop(self):
         while (self.running):
             self.check_events()
-            self.check_state()
-            self.draw_utils()
+            # self.draw_utils()
             self.update()
         pygame.quit()
 
@@ -110,7 +102,7 @@ class Gui():
         # Create fps_text Text object:
         fps = int(self.clock.get_fps())
         fps = "{:.1f}".format(fps)
-        fps_text = Text(text=fps, size=15, color=C_WHITE, tag="FPS")
+        fps_text = Text(text=fps, size=15, color=C_WHITE)
         pos = WINDOW_BOTTOM_RIGHT_POS
 
         # Create rect to cover previous fps_text:
@@ -130,6 +122,6 @@ class Gui():
         pos_char = ord('A')
         for pos in WIN_POSITIONS:
             # Draw character representing the position:
-            text = Text(f"{chr(pos_char)}", 15, C_GREEN, "")
+            text = Button(f"{chr(pos_char)}", 15, C_GREEN, None)
             text.draw(self.main_surface, pos)
             pos_char += 1

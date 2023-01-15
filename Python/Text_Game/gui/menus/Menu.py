@@ -1,35 +1,35 @@
-from gui.Text import Text
+import pygame
+from gui.Button import Button
 from gui.game_settings import *
-from gui.types.StateType import StateType
 
 
 class Menu():
-    def __init__(self, surface) -> None:
+    def __init__(self, surface, buttons_info) -> None:
         self.surface = surface
-
-    def draw_menu(self):
-        print("drawing menu")
-
-    def draw_buttons(self):
-        pass
+        self.menu_buttons = self.create_buttons(
+            buttons_info, 50, WINDOW_CENTER_POS)
 
     def draw_game_title(self):
-        title_text = Text(WIN_TITLE, 56, C_WHITE)
+        title_text = Button(WIN_TITLE, 56, C_WHITE, None)
         title_text.draw_centered(
             self.surface, adjust_pos(WINDOW_TOP_POS, 0, 35))
-        
-    def check_menu_buttons(self) -> StateType:
-        return StateType.EMPTY_STATE
-        
-    def create_buttons(self, txt_and_size_dict, offset, pos):
-        buttons_and_positions_dict = dict()
-        for button_text in txt_and_size_dict:
+
+    def check_menu_buttons(self):
+        for button in self.menu_buttons:
+            pos = pygame.mouse.get_pos()
+            collision_detected = button.rect.collidepoint(pos)
+            if collision_detected:
+                return button.button_type
+        return None
+
+    def create_buttons(self, buttons_info, offset, pos):
+        pos_to_button = dict()
+        for btn_info in buttons_info:
             # Create Button:
-            text_tag = button_text.split()[0]
-            text_size = txt_and_size_dict[button_text]
-            button = Text(button_text, text_size, C_WHITE, text_tag)
+            button_text, button_type, text_size = btn_info
+            btn_info = Button(button_text, text_size, C_WHITE, button_type)
             # Save button position:
-            buttons_and_positions_dict[button] = pos
+            pos_to_button[btn_info] = pos
             # Update position:
             pos = (pos[0], pos[1] + offset)
-        return buttons_and_positions_dict
+        return pos_to_button
