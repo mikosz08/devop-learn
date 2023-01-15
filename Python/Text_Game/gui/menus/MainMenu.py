@@ -1,6 +1,5 @@
 import pygame
 from gui.menus.Menu import Menu
-from gui.Text import Text
 from gui.game_settings import *
 from gui.types.ButtonType import ButtonType
 from gui.types.StateType import StateType
@@ -11,7 +10,7 @@ class MainMenu(Menu):
     def __init__(self, surface) -> None:
         super().__init__(surface)
 
-    def draw_main_menu(self):
+    def draw_menu(self):
         self.draw_game_title()
         self.draw_main_menu_buttons()
 
@@ -24,7 +23,7 @@ class MainMenu(Menu):
         for button in self.main_menu_buttons:
             button.draw_centered(self.surface, self.main_menu_buttons[button])
 
-    def check_main_menu_buttons(self):
+    def check_menu_buttons(self):
         for button in self.main_menu_buttons:
             pos = pygame.mouse.get_pos()
             collision_detected = button.rect.collidepoint(pos)
@@ -38,4 +37,4 @@ class MainMenu(Menu):
 
                     case ButtonType.QUIT_BUTTON.value:
                         return StateType.IN_QUIT_MENU
-        return None
+        return StateType.EMPTY_STATE

@@ -7,7 +7,7 @@ class StartMenu(Menu):
     def __init__(self, surface) -> None:
         super().__init__(surface)
 
-    def draw_start_menu(self):
+    def draw_menu(self):
         self.draw_start_menu_buttons()
 
     def draw_start_menu_buttons(self):

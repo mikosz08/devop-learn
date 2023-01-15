@@ -1,15 +1,25 @@
 from gui.Text import Text
 from gui.game_settings import *
+from gui.types.StateType import StateType
 
 
 class Menu():
     def __init__(self, surface) -> None:
         self.surface = surface
 
+    def draw_menu(self):
+        print("drawing menu")
+
+    def draw_buttons(self):
+        pass
+
     def draw_game_title(self):
         title_text = Text(WIN_TITLE, 56, C_WHITE)
         title_text.draw_centered(
             self.surface, adjust_pos(WINDOW_TOP_POS, 0, 35))
+        
+    def check_menu_buttons(self) -> StateType:
+        return StateType.EMPTY_STATE
         
     def create_buttons(self, txt_and_size_dict, offset, pos):
         buttons_and_positions_dict = dict()

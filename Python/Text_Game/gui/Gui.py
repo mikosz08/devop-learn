@@ -40,13 +40,13 @@ class Gui():
         game_state = self.state_manager.get_game_state()
         match game_state:
             case StateType.IN_MAIN_MENU:
-                self.main_menu = MainMenu(self.main_surface)
-                self.main_menu.draw_main_menu()
+                self.current_menu = MainMenu(self.main_surface)
+                self.current_menu.draw_menu()
                 Logger.log_message("Entered Main Menu")
 
             case StateType.IN_START_MENU:
-                self.start_menu = StartMenu(self.main_surface)
-                self.start_menu.draw_start_menu()
+                self.current_menu = StartMenu(self.main_surface)
+                self.current_menu.draw_menu()
                 Logger.log_message("Entered Start Menu")
 
             case StateType.IN_CREDITS_MENU:
@@ -65,21 +65,25 @@ class Gui():
     def check_state(self):
         mouse_pressed = pygame.mouse.get_pressed()[0] == 1
         if mouse_pressed:
-            current_state = self.state_manager.get_game_state()
-            match current_state:
-                case StateType.IN_MAIN_MENU:
-                    new_state = self.main_menu.check_main_menu_buttons()
-                    if new_state != None:
-                        self.state_manager.set_game_state(new_state)
-                        self.draw()
-                case StateType.IN_START_MENU:
-                    pass
-                case StateType.IN_CREDITS_MENU:
-                    pass
-                case StateType.IN_QUIT_MENU:
-                    self.running = False
-                case StateType.IN_GAME:
-                    pass
+            new_state = self.current_menu.check_menu_buttons()
+            if new_state != StateType.EMPTY_STATE:
+                self.state_manager.set_game_state(new_state)
+                self.draw()
+                
+            # current_state = self.state_manager.get_game_state()    
+            # match current_state:
+            #     case StateType.IN_MAIN_MENU:
+            #         if new_state != None:
+            #             self.state_manager.set_game_state(new_state)
+            #             self.draw()
+            #     case StateType.IN_START_MENU:
+            #         pass
+            #     case StateType.IN_CREDITS_MENU:
+            #         pass
+            #     case StateType.IN_QUIT_MENU:
+            #         self.running = False
+            #     case StateType.IN_GAME:
+            #         pass
 
     def fill_black(self):
         self.main_surface.fill(C_BLACK)

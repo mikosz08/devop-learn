@@ -2,6 +2,7 @@ from enum import Enum
 
 
 class StateType(Enum):
+    EMPTY_STATE = 0
     IN_MAIN_MENU = 1
     IN_START_MENU = 2
     IN_CREDITS_MENU = 3
