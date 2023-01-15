@@ -1,6 +1,7 @@
 import pygame
-from gui.MainMenu import MainMenu
-from gui.StartMenu import StartMenu
+from gui.menus.MainMenu import MainMenu
+from gui.menus.StartMenu import StartMenu
+
 from gui.StateManager import StateManager
 from gui.Text import Text
 from gui.types.StateType import StateType
@@ -95,7 +96,7 @@ class Gui():
         while (self.running):
             self.check_events()
             self.check_state()
-            # self.draw_utils()
+            self.draw_utils()
             self.update()
         pygame.quit()
 
