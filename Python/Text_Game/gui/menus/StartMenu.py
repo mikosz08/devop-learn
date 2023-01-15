@@ -1,4 +1,4 @@
-from gui.Menu import Menu
+from gui.menus.Menu import Menu
 from gui.types.ButtonType import ButtonType
 from gui.game_settings import *
 

@@ -21,8 +21,8 @@ C_MAROON    = (128, 0, 0)
 C_OLIVE     = (128, 128, 0)
 C_GREEN     = (0, 128, 0)
 C_PURPLE    = (128, 0, 128)
-C_TEAL     = (0, 128, 128)
-C_NAVY     = (0, 0, 128)
+C_TEAL      = (0, 128, 128)
+C_NAVY      = (0, 0, 128)
 
 ANTIALIASING_THRESHOLD = 15
 

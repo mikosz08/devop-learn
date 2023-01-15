@@ -1,5 +1,5 @@
 import pygame
-from gui.Menu import Menu
+from gui.menus.Menu import Menu
 from gui.Text import Text
 from gui.game_settings import *
 from gui.types.ButtonType import ButtonType
@@ -16,11 +16,11 @@ class MainMenu(Menu):
         self.draw_main_menu_buttons()
 
     def draw_main_menu_buttons(self):
-        text_size_dict = {ButtonType.START_BUTTON.value: 46,
-                          ButtonType.QUIT_BUTTON.value: 36,
-                          ButtonType.CREDITS_BUTTON.value: 26}
+        button_and_size_dict = {ButtonType.START_BUTTON.value: 45,
+                          ButtonType.CREDITS_BUTTON.value: 35,
+                          ButtonType.QUIT_BUTTON.value: 25}
         self.main_menu_buttons = self.create_buttons(
-            text_size_dict, 50, WINDOW_CENTER_POS)
+            button_and_size_dict, 50, WINDOW_CENTER_POS)
         for button in self.main_menu_buttons:
             button.draw_centered(self.surface, self.main_menu_buttons[button])
 
