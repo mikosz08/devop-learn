@@ -11,8 +11,6 @@ Some basic examples of:
 8. Functions
 """
 import random
-from re import A
-from time import sleep
 
 
 def line():

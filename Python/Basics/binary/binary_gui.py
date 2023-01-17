@@ -15,7 +15,7 @@ class BinGUI:
                 break
             elif event == "-BtT-":
                 binary = values["-BINARY-"]
-                window["-TEXT-"].update(translate(binary))
+                # window["-TEXT-"].update(translate(binary))
                 #This creates the 'animation' of pulling the binary string, it's cool, but slow with larger strings.
                 # pull_thread = threading.Thread(
                 #     self.pull_binary(binary, window))
@@ -38,7 +38,7 @@ class BinGUI:
             if event == "update_text":
                 window["-TEXT-"].update(
                     f'{window["-TEXT-"].get()} {values[event]}')
-                sleep(0.1)
+                sleep(0.01)
                 window.refresh()
 
         window.close()
@@ -191,11 +191,9 @@ class BinGUI:
 
         layout = [
             [layout_binary],
-            # [sg.VPush()],
             [sg.Push(),
              sg.Column(centered, element_justification='c'),
              sg.Push()],
-            # [sg.VPush()],
             [layout_text]
         ]
 

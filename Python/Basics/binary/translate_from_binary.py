@@ -42,10 +42,10 @@ def binary_to_str(b_str):
     dec = 0
     
     for i in range(0, len(b_str)):
-        print("================")
+        # print("================")
         bit = int(b_str[i])
         dec += base**power*bit
-        print(base**power*bit)
+        # print(base**power*bit)
         power -= 1
     print(f"Binary:{b_str} = [{dec}] = [{chr(dec)}]")
     return chr(dec)
