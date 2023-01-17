@@ -32,8 +32,7 @@ class Gui():
         # Is game running:
         self.running = True
         # Set game state:
-        self.state_manager = StateManager(
-            self.main_surface, initial_state=StateType.IN_MAIN_MENU)
+        self.state_manager = StateManager(initial_state=StateType.IN_MAIN_MENU)
         # Draw:
         self.draw()
 
@@ -54,7 +53,6 @@ class Gui():
                 Logger.log_message("Entered Start Menu")
 
             case StateType.IN_CREDITS_MENU:
-                print("tutaj")
                 self.current_menu = CreditsMenu(
                     self.main_surface, CREDITS_MENU_BUTTONS)
                 self.current_menu.draw_menu()
@@ -69,15 +67,12 @@ class Gui():
         for event in events:
             if event.type == pygame.QUIT:
                 self.running = False
-            if event.type == pygame.MOUSEBUTTONUP and self.state_manager.game_state != StateType.IN_GAME:
-                button_clicked = self.current_menu.check_menu_buttons()
-                if button_clicked != None:
-                    self.set_game_state(button_clicked)
-
-    def set_game_state(self, new_state):
-        self.state_manager.set_game_state(new_state)
-        self.draw()
-
+            if event.type == pygame.MOUSEBUTTONUP:
+                state_changed = self.current_menu.check_menu_buttons()
+                if state_changed != None:
+                    self.state_manager.set_game_state(state_changed)
+                    self.draw()
+        
     def fill_black(self):
         self.main_surface.fill(C_BLACK)
 
@@ -92,7 +87,7 @@ class Gui():
     def main_loop(self):
         while (self.running):
             self.check_events()
-            # self.draw_utils()
+            self.draw_utils()
             self.update()
         pygame.quit()
 

@@ -13,9 +13,6 @@ class Text():
         text_surface = font.render(text, antialias, color)
         return text_surface
 
-    def __str__(self) -> str:
-        return f"<surface: {self.surface}>, <rec: {self.rect}>, <tag: {self.tag}>"
-
     def draw(self, draw_surface, cords):
         self.rect = cords
         draw_surface.blit(self.surface, self.rect)

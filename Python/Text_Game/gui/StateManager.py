@@ -3,8 +3,7 @@ from utils.Logger import Logger
 
 class StateManager:
 
-    def __init__(self, surface, initial_state) -> None:
-        self.main_surface = surface
+    def __init__(self, initial_state) -> None:
         self.game_state = initial_state
 
     def set_game_state(self, state):
