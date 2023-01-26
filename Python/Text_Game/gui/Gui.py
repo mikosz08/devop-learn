@@ -2,6 +2,7 @@ import pygame
 from gui.Button import Button
 from gui.menus.CreditsMenu import CreditsMenu
 from gui.menus.MainMenu import MainMenu
+from gui.menus.NewGameMenu import NewGameMenu
 from gui.menus.StartMenu import StartMenu
 from gui.StateManager import StateManager
 from gui.Text import Text
@@ -33,28 +34,40 @@ class Gui():
         self.running = True
         # Set game state:
         self.state_manager = StateManager(initial_state=StateType.IN_MAIN_MENU)
+        # Checking user input:
+        self.getting_user_input = False
         # Draw:
         self.draw()
 
     def draw(self):
         self.fill_black()
         game_state = self.state_manager.get_game_state()
+        if self.getting_user_input:
+            self.getting_user_input = False
+            Logger.log_message(
+                f"Getting User Input [{self.getting_user_input}]")
         match game_state:
             case StateType.IN_MAIN_MENU:
                 self.current_menu = MainMenu(
-                    self.main_surface, MAIN_MENU_BUTTONS)
+                    self.main_surface, MAIN_MENU_BUTTONS, WINDOW_CENTER_POS)
                 self.current_menu.draw_menu()
                 Logger.log_message("Entered Main Menu")
 
             case StateType.IN_START_MENU:
                 self.current_menu = StartMenu(
-                    self.main_surface, START_MENU_BUTTONS)
+                    self.main_surface, START_MENU_BUTTONS, WINDOW_CENTER_POS)
                 self.current_menu.draw_menu()
                 Logger.log_message("Entered Start Menu")
 
+            case StateType.IN_NEW_GAME_MENU:
+                self.current_menu = NewGameMenu(
+                    self.main_surface, NEW_GAME_BUTTONS, adjust_pos(WINDOW_CENTER_POS, height=150))
+                self.current_menu.draw_menu()
+                Logger.log_message("Entered New Game Menu")
+
             case StateType.IN_CREDITS_MENU:
                 self.current_menu = CreditsMenu(
-                    self.main_surface, CREDITS_MENU_BUTTONS)
+                    self.main_surface, CREDITS_MENU_BUTTONS, WINDOW_CENTER_POS)
                 self.current_menu.draw_menu()
                 Logger.log_message("Entered Credits Menu")
 
@@ -65,14 +78,28 @@ class Gui():
     def check_events(self):
         events = pygame.event.get()
         for event in events:
+            
             if event.type == pygame.QUIT:
                 self.running = False
+
             if event.type == pygame.MOUSEBUTTONUP:
+
                 state_changed = self.current_menu.check_menu_buttons()
-                if state_changed != None:
+                if state_changed == None:
+                    return
+                if state_changed == StateType.GETTING_USER_INPUT:
+                    if not self.getting_user_input:
+                        self.getting_user_input = True
+                        self.current_menu.clear_input_field()
+                        self.current_menu.clicked_button.set_text('')
+                        Logger.log_message(f"Getting User Input [{self.getting_user_input}]")
+                else:
                     self.state_manager.set_game_state(state_changed)
                     self.draw()
-        
+
+            if event.type == pygame.KEYDOWN and self.getting_user_input:
+                self.current_menu.update_input_field(event.unicode)
+
     def fill_black(self):
         self.main_surface.fill(C_BLACK)
 
@@ -87,7 +114,7 @@ class Gui():
     def main_loop(self):
         while (self.running):
             self.check_events()
-            self.draw_utils()
+            # self.draw_utils()
             self.update()
         pygame.quit()
 

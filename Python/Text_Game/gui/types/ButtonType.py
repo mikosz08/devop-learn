@@ -9,10 +9,15 @@ class ButtonType(Enum):
     CREDITS_BUTTON = ("Credits", StateType.IN_CREDITS_MENU, 30)
 
     # Start Menu
-    NEW_GAME_BUTTON = ("New Game", StateType.EMPTY_STATE, 45)
-    CONTINUE_BUTTON = ("Continue", StateType.EMPTY_STATE, 40)
-    BACK_BUTTON = ("Back", StateType.IN_MAIN_MENU, 35)
-
+    NEW_GAME_BUTTON = ("New Game", StateType.IN_NEW_GAME_MENU, 45)
+    CONTINUE_BUTTON = ("Continue", StateType.IN_CONTINUE_MENU, 40)
+    
+    # New Game Menu
+    DONE_BUTTON = ("Done", StateType.IN_GAME, 35)
+    
+    BACK_TO_MAIN_MENU_BUTTON = ("Back", StateType.IN_MAIN_MENU, 35)
+    BACK_TO_START_MENU_BUTTON = ("Back", StateType.IN_START_MENU, 35)
+        
 
 MAIN_MENU_BUTTONS = [
     ButtonType.START_BUTTON.value,
@@ -23,9 +28,14 @@ MAIN_MENU_BUTTONS = [
 START_MENU_BUTTONS = [
     ButtonType.CONTINUE_BUTTON.value,
     ButtonType.NEW_GAME_BUTTON.value,
-    ButtonType.BACK_BUTTON.value
+    ButtonType.BACK_TO_MAIN_MENU_BUTTON.value
 ]
 
 CREDITS_MENU_BUTTONS = [
-    ButtonType.BACK_BUTTON.value
+    ButtonType.BACK_TO_MAIN_MENU_BUTTON.value
+]
+
+NEW_GAME_BUTTONS = [
+    ButtonType.DONE_BUTTON.value,
+    ButtonType.BACK_TO_START_MENU_BUTTON.value
 ]

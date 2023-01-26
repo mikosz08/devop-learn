@@ -4,6 +4,7 @@ from gui.game_settings import *
 
 class Text():
     def __init__(self, text, size, color) -> None:
+        self.raw_text = text
         self.surface = self.create_text_surface(text, size, color)
         self.rect = self.surface.get_rect()
 
@@ -17,3 +18,6 @@ class Text():
         self.rect = cords
         draw_surface.blit(self.surface, self.rect)
         return self
+
+    def get_text(self):
+        return self.raw_text
