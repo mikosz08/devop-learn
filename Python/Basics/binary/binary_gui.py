@@ -15,7 +15,7 @@ class BinGUI:
                 break
             elif event == "-BtT-":
                 binary = values["-BINARY-"]
-                # window["-TEXT-"].update(translate(binary))
+                window["-TEXT-"].update(translate(binary))
                 #This creates the 'animation' of pulling the binary string, it's cool, but slow with larger strings.
                 # pull_thread = threading.Thread(
                 #     self.pull_binary(binary, window))
